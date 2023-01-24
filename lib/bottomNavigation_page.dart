@@ -1,8 +1,9 @@
-import 'package:dars_20_01_2023_firebase/main_page.dart';
+import 'package:dars_20_01_2023_firebase/google_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'controller.dart';
+import 'facebook_page.dart';
 import 'home_page.dart';
 
 class BottomNavPage extends StatefulWidget {
@@ -19,7 +20,8 @@ class _BottomNavPageState extends State<BottomNavPage> {
     MyHomePage(
       title: 'Home Page',
     ),
-    MainPage(),
+    GooglePage(),
+    FacebookPage()
   ];
 
   @override
@@ -38,8 +40,9 @@ class _BottomNavPageState extends State<BottomNavPage> {
           context.read<AppController>().setIndex(value);
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Google"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Facebook"),
         ],
       ),
     );

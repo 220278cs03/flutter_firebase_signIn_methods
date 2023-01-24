@@ -1,5 +1,6 @@
 import 'package:dars_20_01_2023_firebase/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -40,8 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     print(data?.email);
                     print(data?.photoUrl);
                     print(data?.displayName);
-                    context.read<AppController>().getAvatar(data?.photoUrl ?? "");
-                    context.read<AppController>().getName(data?.displayName ?? "");
+                    context
+                        .read<AppController>()
+                        .getAvatar(data?.photoUrl ?? "");
+                    context
+                        .read<AppController>()
+                        .getName(data?.displayName ?? "");
                     context.read<AppController>().getEmail(data?.email ?? "");
                     setState(() {});
                     _googleSignIn.signOut();
@@ -50,6 +55,59 @@ class _MyHomePageState extends State<MyHomePage> {
                   }
                 },
                 child: Text("Google sign in")),
+            ElevatedButton(
+              onPressed: () async {
+                // Create an instance of FacebookLogin
+                final fb = FacebookLogin();
+
+// Log in
+                final res = await fb.logIn(permissions: [
+                  FacebookPermission.publicProfile,
+                  FacebookPermission.email,
+                ]);
+
+// Check result status
+                switch (res.status) {
+                  case FacebookLoginStatus.success:
+                    // Logged in
+
+                    // Send access token to server for validation and auth
+                    final FacebookAccessToken? accessToken = res.accessToken;
+                    print('Access token: ${accessToken?.token}');
+
+                    // Get profile data
+                    final profile = await fb.getUserProfile();
+                    //----------------------------------------------------------------------------
+                    context.read<AppController>().getFacebookName(profile?.name ?? "NAME");
+                    context.read<AppController>().getFacebookId(profile?.userId ?? "ID");
+                    //----------------------------------------------------------------------------
+                    print(
+                        'Hello, ${profile?.name}! You ID: ${profile?.userId}');
+
+                    // Get user profile image url
+                    final imageUrl = await fb.getProfileImageUrl(width: 100);
+                    print('Your profile image: $imageUrl');
+                    //-----------------------------------------------------------------------------
+                    context.read<AppController>().getFacebookImage(imageUrl ?? "");
+                    //-----------------------------------------------------------------------------
+
+                    // Get email (since we request email permission)
+                    final email = await fb.getUserEmail();
+                    // But user can decline permission
+                    if (email != null) print('And your email is $email');
+
+                    break;
+                  case FacebookLoginStatus.cancel:
+                    // User cancel log in
+                    break;
+                  case FacebookLoginStatus.error:
+                    // Log in failed
+                    print('Error while log in: ${res.error}');
+                    break;
+                }
+              },
+              child: Text("Facebook"),
+            )
           ],
         ),
       ),

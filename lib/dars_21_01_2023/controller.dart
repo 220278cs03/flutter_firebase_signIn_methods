@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class AppController extends ChangeNotifier{
+class AppController extends ChangeNotifier {
   int counter = 0;
   String avatar = "";
   String name = "NAME";
@@ -15,37 +15,37 @@ class AppController extends ChangeNotifier{
     notifyListeners();
   }
 
-
-  AddCount(){
-    counter+=1;
+  AddCount() {
+    counter += 1;
     notifyListeners();
   }
-  getAvatar(String avatar){
+
+  getAvatar(String avatar) {
     this.avatar = avatar;
     notifyListeners();
   }
 
-  getName(String name){
+  getName(String name) {
     this.name = name;
     notifyListeners();
   }
 
-  getEmail(String email){
+  getEmail(String email) {
     this.email = email;
     notifyListeners();
   }
 
-  getFacebookName(String facebook_name){
+  getFacebookName(String facebook_name) {
     this.facebook_name = facebook_name;
     notifyListeners();
   }
 
-  getFacebookImage (String facebook_image){
+  getFacebookImage(String facebook_image) {
     this.facebook_image = facebook_image;
     notifyListeners();
   }
 
-  getFacebookId(String facebook_id){
+  getFacebookId(String facebook_id) {
     this.facebook_id = facebook_id;
     notifyListeners();
   }

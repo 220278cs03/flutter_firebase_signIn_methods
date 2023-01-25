@@ -1,13 +1,11 @@
-import 'package:dars_20_01_2023_firebase/controller.dart';
+import 'package:dars_20_01_2023_firebase/dars_21_01_2023/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -78,8 +76,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     // Get profile data
                     final profile = await fb.getUserProfile();
                     //----------------------------------------------------------------------------
-                    context.read<AppController>().getFacebookName(profile?.name ?? "NAME");
-                    context.read<AppController>().getFacebookId(profile?.userId ?? "ID");
+                    context
+                        .read<AppController>()
+                        .getFacebookName(profile?.name ?? "NAME");
+                    context
+                        .read<AppController>()
+                        .getFacebookId(profile?.userId ?? "ID");
                     //----------------------------------------------------------------------------
                     print(
                         'Hello, ${profile?.name}! You ID: ${profile?.userId}');
@@ -88,7 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     final imageUrl = await fb.getProfileImageUrl(width: 100);
                     print('Your profile image: $imageUrl');
                     //-----------------------------------------------------------------------------
-                    context.read<AppController>().getFacebookImage(imageUrl ?? "");
+                    context
+                        .read<AppController>()
+                        .getFacebookImage(imageUrl ?? "");
                     //-----------------------------------------------------------------------------
 
                     // Get email (since we request email permission)

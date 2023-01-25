@@ -1,3 +1,4 @@
+import 'package:dars_20_01_2023_firebase/dars_23_01_2023/verify_code.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class AddNumber extends StatefulWidget {
 
 class _AddNumberState extends State<AddNumber> {
   final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,14 @@ class _AddNumberState extends State<AddNumber> {
             phoneNumber: controller.text,
             verificationCompleted: (PhoneAuthCredential credential) {},
             verificationFailed: (FirebaseAuthException e) {},
-            codeSent: (String verificationId, int? resendToken) {},
+            codeSent: (String verificationId, int? resendToken) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => VerifyPage(
+                            verId: verificationId,
+                          )));
+            },
             codeAutoRetrievalTimeout: (String verificationId) {},
           );
         },

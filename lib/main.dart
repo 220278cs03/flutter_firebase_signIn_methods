@@ -6,9 +6,8 @@ import 'package:provider/provider.dart';
 
 import 'dars_21_01_2023/bottomNavigation_page.dart';
 import 'dars_21_01_2023/controller.dart';
-import 'dars_24_01_2023/get_product.dart';
-import 'dars_24_01_2023/uy_ishi/get_university.dart';
-
+import 'dars_24_25_01_2023/get_product.dart';
+import 'dars_24_25_01_2023/uy_ishi/get_university.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AppController()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: GetUniversity(),
       ),
     );

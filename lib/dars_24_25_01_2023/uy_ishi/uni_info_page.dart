@@ -1,4 +1,4 @@
-import 'package:dars_20_01_2023_firebase/dars_24_01_2023/uy_ishi/university_model.dart';
+import 'package:dars_20_01_2023_firebase/dars_24_25_01_2023/uy_ishi/university_model.dart';
 import 'package:flutter/material.dart';
 
 class UniInfoPage extends StatelessWidget {
